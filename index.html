@@ -1,0 +1,1012 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Sandip Paudel | Web Developer, Designer & Tech Enthusiast</title>
+  <meta
+    name="description"
+    content="Sandip Paudel portfolio - modern web developer, designer, and tech enthusiast delivering premium websites, branding, SEO, and digital solutions."
+  />
+  <meta
+    name="keywords"
+    content="Sandip Paudel, portfolio, web developer, designer, WordPress, SEO, graphic design, JavaScript"
+  />
+  <meta name="author" content="Sandip Paudel" />
+  <meta property="og:title" content="Sandip Paudel | my Portfolio" />
+  <meta
+    property="og:description"
+    content="Explore projects, skills, services, and contact details of Sandip Paudel."
+  />
+  <meta property="og:type" content="website" />
+  <meta name="theme-color" content="#08080f" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap"
+    rel="stylesheet"
+  />
+  <style>
+    :root {
+      --bg: #08080f;
+      --bg-soft: #0d1020;
+      --text: #f5f7ff;
+      --muted: #c3c9e8;
+      --line: rgba(255, 255, 255, 0.12);
+      --card: rgba(20, 25, 50, 0.42);
+      --shadow: 0 18px 60px rgba(0, 0, 0, 0.45);
+      --grad: linear-gradient(120deg, #4f46e5, #0ea5e9, #7c3aed);
+      --grad-soft: linear-gradient(120deg, rgba(79, 70, 229, 0.4), rgba(14, 165, 233, 0.4), rgba(124, 58, 237, 0.4));
+      --radius: 18px;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      font-family: "Inter", sans-serif;
+      background: radial-gradient(circle at 15% 20%, #161632 0%, transparent 35%),
+                  radial-gradient(circle at 80% 10%, #16233f 0%, transparent 40%),
+                  radial-gradient(circle at 50% 90%, #29144d 0%, transparent 45%),
+                  var(--bg);
+      color: var(--text);
+      line-height: 1.6;
+      overflow-x: hidden;
+      min-height: 100vh;
+    }
+
+    body::before {
+      content: "";
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      background: linear-gradient(to bottom right, rgba(255, 255, 255, 0.03), rgba(255, 255, 255, 0));
+      z-index: -2;
+    }
+
+    #particle-canvas {
+      position: fixed;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      z-index: -3;
+      pointer-events: none;
+      opacity: 0.7;
+    }
+
+    .cursor-dot,
+    .cursor-ring {
+      position: fixed;
+      top: 0;
+      left: 0;
+      pointer-events: none;
+      border-radius: 999px;
+      transform: translate(-50%, -50%);
+      z-index: 9999;
+      transition: opacity 0.2s ease;
+    }
+
+    .cursor-dot {
+      width: 8px;
+      height: 8px;
+      background: #7dd3fc;
+      box-shadow: 0 0 18px rgba(125, 211, 252, 0.9);
+    }
+
+    .cursor-ring {
+      width: 34px;
+      height: 34px;
+      border: 1px solid rgba(125, 211, 252, 0.8);
+      box-shadow: 0 0 18px rgba(56, 189, 248, 0.35);
+    }
+
+    a, button {
+      cursor: none;
+    }
+
+    .container {
+      width: min(1150px, 92%);
+      margin: 0 auto;
+    }
+
+    .glass {
+      background: var(--card);
+      border: 1px solid var(--line);
+      backdrop-filter: blur(18px);
+      -webkit-backdrop-filter: blur(18px);
+      box-shadow: var(--shadow);
+      border-radius: var(--radius);
+    }
+
+    .section {
+      padding: 82px 0;
+    }
+
+    .section-title {
+      font-size: clamp(1.6rem, 2.5vw, 2.3rem);
+      margin-bottom: 10px;
+      font-weight: 700;
+      letter-spacing: 0.3px;
+    }
+
+    .section-subtitle {
+      color: var(--muted);
+      margin-bottom: 34px;
+      max-width: 690px;
+    }
+
+    .reveal {
+      opacity: 0;
+      transform: translateY(24px);
+      transition: 0.8s cubic-bezier(0.2, 0.65, 0.2, 1);
+    }
+
+    .reveal.active {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    nav {
+      position: sticky;
+      top: 12px;
+      z-index: 1000;
+      margin: 14px auto 0;
+      width: min(1150px, 92%);
+    }
+
+    .navbar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 13px 18px;
+    }
+
+    .brand {
+      font-weight: 800;
+      letter-spacing: 0.5px;
+      font-size: 1.08rem;
+      background: var(--grad);
+      background-clip: text;
+      -webkit-background-clip: text;
+      color: transparent;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 16px;
+      flex-wrap: wrap;
+    }
+
+    .nav-links a {
+      color: #e4e9ff;
+      text-decoration: none;
+      font-size: 0.93rem;
+      transition: color 0.2s ease;
+    }
+
+     .nav-links .nav-resume {
+      border: 1px solid var(--line);
+      border-radius: 10px;
+      padding: 6px 12px;
+      background: rgba(255, 255, 255, 0.05);
+      line-height: 1.1;
+    }
+
+    .nav-links a:hover {
+      color: #67e8f9;
+    }
+
+    .hero {
+      padding: 95px 0 75px;
+    }
+
+    .hero-grid {
+      display: grid;
+      grid-template-columns: 1.2fr 0.8fr;
+      gap: 26px;
+      align-items: center;
+    }
+
+    .hero-card {
+      padding: clamp(22px, 3vw, 38px);
+    }
+
+    .hero-intro {
+      color: #a9b4da;
+      font-size: 0.95rem;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      margin-bottom: 14px;
+    }
+
+    h1 {
+      font-size: clamp(2rem, 5vw, 3.7rem);
+      line-height: 1.1;
+      margin-bottom: 16px;
+      font-weight: 800;
+    }
+
+    .gradient-text {
+      background: var(--grad);
+      background-size: 180% 180%;
+      animation: gradientFlow 8s ease infinite;
+      background-clip: text;
+      -webkit-background-clip: text;
+      color: transparent;
+    }
+
+    @keyframes gradientFlow {
+      0% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+      100% { background-position: 0% 50%; }
+    }
+
+    .typing-wrap {
+      font-size: clamp(1.05rem, 2.3vw, 1.3rem);
+      color: #dae3ff;
+      margin-bottom: 18px;
+      min-height: 33px;
+      font-weight: 500;
+    }
+
+    .hero-copy {
+      color: var(--muted);
+      margin-bottom: 24px;
+      max-width: 64ch;
+    }
+
+    .cta-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+    }
+
+    .btn {
+      border: 1px solid var(--line);
+      border-radius: 12px;
+      padding: 11px 18px;
+      color: #eef2ff;
+      text-decoration: none;
+      font-weight: 600;
+      transition: all 0.25s ease;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      background: rgba(255, 255, 255, 0.03);
+    }
+
+    .btn-primary {
+      background: var(--grad);
+      border: none;
+    }
+
+    .btn:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 10px 24px rgba(59, 130, 246, 0.28);
+    }
+
+    .hero-side {
+      padding: 24px;
+    }
+
+    .profile-wrap {
+      display: grid;
+      gap: 14px;
+      margin-bottom: 14px;
+    }
+
+    .profile-photo {
+      width: 100%;
+      max-width: 280px;
+      aspect-ratio: 1 / 1;
+      object-fit: cover;
+      border-radius: 18px;
+      margin: 0 auto;
+      border: 1px solid rgba(103, 232, 249, 0.4);
+      box-shadow: 0 18px 38px rgba(15, 23, 42, 0.55);
+    }
+
+    .profile-caption {
+      text-align: center;
+      color: #cbd5ff;
+      font-size: 0.92rem;
+    }
+
+    .stats {
+      display: grid;
+      gap: 14px;
+    }
+
+    .stat-item {
+      padding: 16px;
+      border-radius: 14px;
+      background: rgba(255, 255, 255, 0.03);
+      border: 1px solid var(--line);
+    }
+
+    .stat-item h3 {
+      font-size: 1.3rem;
+      color: #67e8f9;
+    }
+
+    .about-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 22px;
+    }
+
+    .about-card,
+    .skills-card,
+    .service-card,
+    .project-card,
+    .testimonial-card,
+    .contact-card,
+    .resume-card {
+      padding: 22px;
+    }
+
+    .about-points {
+      list-style: none;
+      display: grid;
+      gap: 10px;
+      color: var(--muted);
+    }
+
+    .about-points li {
+      border-left: 2px solid rgba(103, 232, 249, 0.6);
+      padding-left: 10px;
+    }
+
+    .highlight-box {
+      margin-top: 14px;
+      padding: 14px;
+      border-radius: 12px;
+      border: 1px solid rgba(103, 232, 249, 0.35);
+      background: rgba(56, 189, 248, 0.08);
+      color: #dbeafe;
+    }
+
+    .skills-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+      gap: 12px;
+    }
+
+    .skill-pill {
+      padding: 11px 14px;
+      border-radius: 12px;
+      background: rgba(255, 255, 255, 0.03);
+      border: 1px solid var(--line);
+      text-align: center;
+      font-weight: 500;
+    }
+
+    .project-grid,
+    .services-grid,
+    .testimonial-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      gap: 16px;
+    }
+
+    .project-card {
+      position: relative;
+      overflow: hidden;
+      transition: transform 0.3s ease, border-color 0.3s ease;
+    }
+
+    .project-card::before {
+      content: "";
+      position: absolute;
+      inset: -1px;
+      border-radius: var(--radius);
+      background: var(--grad-soft);
+      opacity: 0;
+      transition: opacity 0.3s ease;
+      z-index: -1;
+    }
+
+    .project-card:hover {
+      transform: translateY(-7px);
+      border-color: rgba(103, 232, 249, 0.4);
+    }
+
+    .project-card:hover::before {
+      opacity: 1;
+    }
+
+    .project-head {
+      font-size: 1.15rem;
+      margin-bottom: 8px;
+      font-weight: 650;
+    }
+
+    .project-desc {
+      color: var(--muted);
+      margin-bottom: 14px;
+      min-height: 66px;
+    }
+
+    .project-rating {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      margin-bottom: 14px;
+      color: #fde68a;
+      font-size: 0.95rem;
+    }
+
+    .project-rating small {
+      color: #cbd5ff;
+      font-size: 0.82rem;
+    }
+
+    .project-actions {
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
+
+    .service-card h3,
+    .testimonial-card h3 {
+      margin-bottom: 8px;
+    }
+
+    .service-card p,
+    .testimonial-card p,
+    .contact-meta p,
+    .about-card p {
+      color: var(--muted);
+    }
+
+    .contact-meta a {
+      color: #c7d2fe;
+      text-decoration: none;
+    }
+
+    .contact-meta a:hover {
+      color: #67e8f9;
+      text-decoration: underline;
+    }
+
+    .resume-card {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 18px;
+      flex-wrap: wrap;
+    }
+
+    .contact-grid {
+      display: grid;
+      grid-template-columns: 1.1fr 0.9fr;
+      gap: 18px;
+    }
+
+    form {
+      display: grid;
+      gap: 12px;
+    }
+
+    input, textarea {
+      width: 100%;
+      border: 1px solid var(--line);
+      background: rgba(255, 255, 255, 0.03);
+      color: #eef3ff;
+      border-radius: 12px;
+      padding: 12px 13px;
+      font: inherit;
+      outline: none;
+      transition: border-color 0.2s ease;
+    }
+
+    input:focus, textarea:focus {
+      border-color: #38bdf8;
+    }
+
+    textarea {
+      resize: vertical;
+      min-height: 120px;
+    }
+
+    .social-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-top: 14px;
+    }
+
+    .social {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 40px;
+      height: 40px;
+      border-radius: 10px;
+      border: 1px solid var(--line);
+      background: rgba(255, 255, 255, 0.03);
+      color: #e7eeff;
+      text-decoration: none;
+      font-weight: 700;
+    }
+
+    footer {
+      border-top: 1px solid var(--line);
+      padding: 22px 0 35px;
+      text-align: center;
+      color: #b8c0de;
+      font-size: 0.94rem;
+    }
+
+    .to-top {
+      position: fixed;
+      right: 18px;
+      bottom: 18px;
+      width: 42px;
+      height: 42px;
+      border-radius: 12px;
+      border: none;
+      background: var(--grad);
+      color: #fff;
+      font-size: 1.1rem;
+      display: grid;
+      place-items: center;
+      opacity: 0;
+      pointer-events: none;
+      transition: 0.3s ease;
+      z-index: 999;
+    }
+
+    .to-top.show {
+      opacity: 1;
+      pointer-events: auto;
+    }
+
+    @media (max-width: 930px) {
+      .hero-grid,
+      .about-grid,
+      .contact-grid {
+        grid-template-columns: 1fr;
+      }
+
+      nav {
+        top: 8px;
+      }
+
+      .navbar {
+        gap: 14px;
+      }
+    }
+
+    @media (max-width: 640px) {
+      .nav-links {
+        gap: 11px;
+      }
+
+      .nav-links a {
+        font-size: 0.86rem;
+      }
+
+      .cursor-dot,
+      .cursor-ring {
+        display: none;
+      }
+
+      a, button {
+        cursor: pointer;
+      }
+    }
+  </style>
+</head>
+<body>
+  <canvas id="particle-canvas" aria-hidden="true"></canvas>
+  <div class="cursor-dot"></div>
+  <div class="cursor-ring"></div>
+
+  <nav>
+    <div class="navbar glass">
+      <div class="brand">Sandip Paudel</div>
+      <div class="nav-links">
+        <a href="#home">Home</a>
+        <a href="#about">About</a>
+        <a href="#skills">Skills</a>
+        <a href="#projects">Projects</a>
+        <a href="#services">Services</a>
+        <a href="#contact">Contact</a>
+        <a href="assets/SandipPaudelResume.pdf" class="nav-resume" download="SandipPaudelResume.pdf">Resume</a>
+      </div>
+    </div>
+  </nav>
+
+  <header class="hero section" id="home">
+    <div class="container hero-grid">
+      <div class="hero-card glass reveal">
+        <p class="hero-intro"> Digital Portfolio</p>
+        <h1>Hi, I am <span class="gradient-text">Sandip Paudel</span></h1>
+        <div class="typing-wrap" aria-live="polite">
+          <span id="typed-text"></span><span id="typed-cursor">|</span>
+        </div>
+        <p class="hero-copy">
+          Web Developer, Designer, and Tech Enthusiast crafting elegant digital experiences with precision, performance, and futuristic aesthetics. Currently serving as an MIS Operator at Panini Rural Municipality.
+        </p>
+        <div class="cta-row">
+          <a href="#contact" class="btn btn-primary">Hire Me</a>
+          <a href="#contact" class="btn">Contact Me</a>
+          <a href="#projects" class="btn">View Projects</a>
+        </div>
+      </div>
+
+      <aside class="hero-side glass reveal">
+        <div class="profile-wrap">
+          <img
+            class="profile-photo"
+            src="assets/profile.png"
+            alt="Portrait of Sandip Paudel"
+            loading="eager"
+          />
+          <p class="profile-caption">Web Developer & MIS Operator</p>
+        </div>
+        <div class="stats">
+          <div class="stat-item">
+            <h3>25+</h3>
+            <p>Completed Projects</p>
+          </div>
+          <div class="stat-item">
+            <h3>4+ Years</h3>
+            <p>Creative Digital Experience</p>
+          </div>
+          <div class="stat-item">
+            <h3>100%</h3>
+            <p>Client-Focused Delivery</p>
+          </div>
+        </div>
+      </aside>
+    </div>
+  </header>
+
+  <section id="about" class="section">
+    <div class="container">
+      <h2 class="section-title reveal">About Me</h2>
+      <p class="section-subtitle reveal">
+        Passionate about building impactful online experiences through clean code, creative visuals, and strategy-driven solutions.
+      </p>
+      <div class="about-grid">
+        <article class="about-card glass reveal">
+          <p>
+            I am Sandip Paudel, a modern web developer and designer focused on creating responsive, high-performing, and visually striking digital products. I merge development logic with creative design to build premium experiences.
+          </p>
+        </article>
+        <article class="about-card glass reveal">
+          <ul class="about-points">
+            <li><strong>Skills:</strong> Front-end development, WordPress customization, branding, and optimization.</li>
+            <li><strong>Experience:</strong> Recently working at Panini Rural Municipality as an MIS Operator with 1+ year of service, and continuing.</li>
+            <li><strong>Goals:</strong> Deliver meaningful digital transformations with innovative and scalable solutions.</li>
+          </ul>
+          <div class="highlight-box">
+            <strong>Current Role:</strong> MIS Operator at Panini Rural Municipality (1+ year, ongoing), handling information systems, reporting workflows, and digital operations support.
+          </div>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <section id="skills" class="section">
+    <div class="container">
+      <h2 class="section-title reveal">Skills</h2>
+      <p class="section-subtitle reveal">Core technologies and creative capabilities used to deliver premium projects.</p>
+      <div class="skills-grid">
+        <div class="skills-card glass reveal"><div class="skill-pill">HTML</div></div>
+        <div class="skills-card glass reveal"><div class="skill-pill">CSS</div></div>
+        <div class="skills-card glass reveal"><div class="skill-pill">JavaScript</div></div>
+        <div class="skills-card glass reveal"><div class="skill-pill">WordPress</div></div>
+        <div class="skills-card glass reveal"><div class="skill-pill">Graphic Design</div></div>
+        <div class="skills-card glass reveal"><div class="skill-pill">SEO</div></div>
+        <div class="skills-card glass reveal"><div class="skill-pill">AI Tools</div></div>
+      </div>
+    </div>
+  </section>
+
+  <section id="projects" class="section">
+    <div class="container">
+      <h2 class="section-title reveal">Projects</h2>
+      <p class="section-subtitle reveal">A selection of stylish and performance-focused work.</p>
+      <div class="project-grid">
+        <article class="project-card glass reveal">
+          <h3 class="project-head">food-order-system</h3>
+          <p class="project-desc">Online food ordering system with smooth user flow, responsive layout, and practical order management features.</p>
+          <div class="project-actions">
+            <div class="project-rating">★★★★★ <small>5.0</small></div>
+            <a href="https://github.com/sandip312" class="btn" target="_blank" rel="noopener noreferrer">GitHub</a>
+          </div>
+        </article>
+        <article class="project-card glass reveal">
+          <h3 class="project-head">e-commerce</h3>
+          <p class="project-desc">Modern e-commerce platform focused on product browsing, intuitive cart experience, and conversion-driven design.</p>
+          <div class="project-actions">
+            <div class="project-rating">★★★★★ <small>4.9</small></div>
+            <a href="https://github.com/sandip312" class="btn" target="_blank" rel="noopener noreferrer">GitHub</a>
+          </div>
+        </article>
+        <article class="project-card glass reveal">
+          <h3 class="project-head">e-store</h3>
+          <p class="project-desc">Feature-rich online store project with clean UI, easy product discovery, and mobile-friendly shopping journey.</p>
+          <div class="project-actions">
+            <div class="project-rating">★★★★★ <small>4.8</small></div>
+            <a href="https://github.com/sandip312" class="btn" target="_blank" rel="noopener noreferrer">GitHub</a>
+          </div>
+        </article>
+        <article class="project-card glass reveal">
+          <h3 class="project-head">pareli ecommerce</h3>
+          <p class="project-desc">Custom ecommerce concept highlighting stylish product presentation, branding consistency, and fast page flow.</p>
+          <div class="project-actions">
+            <div class="project-rating">★★★★★ <small>5.0</small></div>
+            <a href="https://github.com/sandip312" class="btn" target="_blank" rel="noopener noreferrer">GitHub</a>
+          </div>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <section id="services" class="section">
+    <div class="container">
+      <h2 class="section-title reveal">Services</h2>
+      <p class="section-subtitle reveal">Solutions designed for growth, visibility, and digital excellence.</p>
+      <div class="services-grid">
+        <article class="service-card glass reveal">
+          <h3>Website Development</h3>
+          <p>Fast, scalable, and responsive web experiences tailored to business and personal goals.</p>
+        </article>
+        <article class="service-card glass reveal">
+          <h3>WordPress Design</h3>
+          <p>Premium WordPress websites with custom styling, performance tuning, and easy content management.</p>
+        </article>
+        <article class="service-card glass reveal">
+          <h3>Branding</h3>
+          <p>Visual identity design that builds trust, personality, and market distinction.</p>
+        </article>
+        <article class="service-card glass reveal">
+          <h3>SEO Optimization</h3>
+          <p>On-page SEO setup and optimization to improve discoverability and ranking performance.</p>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <section id="testimonials" class="section">
+    <div class="container">
+      <h2 class="section-title reveal">Testimonials</h2>
+      <p class="section-subtitle reveal">What clients say about working with me.</p>
+      <div class="testimonial-grid">
+        <article class="testimonial-card glass reveal">
+          <h3>Client A</h3>
+          <p>"Sandip delivered a polished website that exceeded our expectations in both design and speed."</p>
+        </article>
+        <article class="testimonial-card glass reveal">
+          <h3>Client B</h3>
+          <p>"Professional, creative, and very reliable. The final result gave our brand a strong digital presence."</p>
+        </article>
+        <article class="testimonial-card glass reveal">
+          <h3>Client C</h3>
+          <p>"The communication and quality were top-tier. Our website now feels modern, premium, and user-friendly."</p>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <section id="contact" class="section">
+    <div class="container">
+      <h2 class="section-title reveal">Contact</h2>
+      <p class="section-subtitle reveal">Let us collaborate and build something exceptional.</p>
+      <div class="contact-grid">
+        <div class="contact-card glass reveal">
+          <form action="mailto:sandippaudel654@gmail.com" method="post" enctype="text/plain">
+            <input type="text" name="name" placeholder="Your Name" required />
+            <input type="email" name="email" placeholder="Your Email" required />
+            <input type="tel" name="phone" placeholder="Your Phone Number" />
+            <textarea name="message" placeholder="Your Message" required></textarea>
+            <button type="submit" class="btn btn-primary">Send Message</button>
+          </form>
+        </div>
+        <aside class="contact-card glass reveal">
+          <div class="contact-meta">
+            <p><strong>Email:</strong> <a href="mailto:sandippaudel654@gmail.com">sandippaudel654@gmail.com</a></p>
+            <p><strong>Phone:</strong> <a href="tel:+9779860822583">9860822583</a></p>
+            <p><strong>WhatsApp:</strong> <a href="https://wa.me/9779860822583" target="_blank" rel="noopener noreferrer">+977 986-0822583</a></p>
+            <p><strong>Location:</strong> Nepal, Arghakhanchi, Panini-02 Pokharathok</p>
+          </div>
+          <div class="social-row">
+            <a class="social" href="https://www.facebook.com/sandip.paudel.587496" target="_blank" rel="noopener noreferrer" aria-label="Facebook">f</a>
+            <a class="social" href="https://np.linkedin.com/in/sandip-paudel-038160271" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn">in</a>
+            <a class="social" href="https://github.com/sandip312" target="_blank" rel="noopener noreferrer" aria-label="GitHub">gh</a>
+            <a class="social" href="https://www.instagram.com/paudelsandip.p?igsh=MXlyZGM0bXE1bjJ6&utm_source=qr" target="_blank" rel="noopener noreferrer" aria-label="Instagram">ig</a>
+            <a class="social" href="https://www.youtube.com/@Paniniarg" target="_blank" rel="noopener noreferrer" aria-label="YouTube">yt</a>
+            <a class="social" href="https://wa.me/9779860822583" target="_blank" rel="noopener noreferrer" aria-label="WhatsApp">wa</a>
+          </div>
+        </aside>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <div class="container">
+      <p>&copy; <span id="year"></span> Sandip Paudel. All rights reserved.</p>
+      <div class="social-row" style="justify-content: center; margin-top: 10px;">
+        <a class="social" href="https://www.facebook.com/sandip.paudel.587496" target="_blank" rel="noopener noreferrer" aria-label="Facebook">f</a>
+        <a class="social" href="https://np.linkedin.com/in/sandip-paudel-038160271" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn">in</a>
+        <a class="social" href="https://github.com/sandip312" target="_blank" rel="noopener noreferrer" aria-label="GitHub">gh</a>
+        <a class="social" href="https://www.youtube.com/@Paniniarg" target="_blank" rel="noopener noreferrer" aria-label="YouTube">yt</a>
+        <a class="social" href="https://wa.me/9779860822583" target="_blank" rel="noopener noreferrer" aria-label="WhatsApp">wa</a>
+      </div>
+    </div>
+  </footer>
+
+  <button class="to-top" id="toTop" aria-label="Back to top">↑</button>
+
+  <script>
+    // Typing effect
+    const typedText = document.getElementById("typed-text");
+    const typedCursor = document.getElementById("typed-cursor");
+    const phrases = [
+      "Web Developer | Designer | Tech Enthusiast",
+      "Building Premium Digital Experiences",
+      "Crafting Fast, Modern & Elegant Websites"
+    ];
+    let phraseIndex = 0;
+    let charIndex = 0;
+    let isDeleting = false;
+
+    function typeLoop() {
+      const current = phrases[phraseIndex];
+      typedText.textContent = current.slice(0, charIndex);
+
+      if (!isDeleting && charIndex < current.length) {
+        charIndex++;
+      } else if (isDeleting && charIndex > 0) {
+        charIndex--;
+      } else if (!isDeleting && charIndex === current.length) {
+        isDeleting = true;
+        setTimeout(typeLoop, 1200);
+        return;
+      } else {
+        isDeleting = false;
+        phraseIndex = (phraseIndex + 1) % phrases.length;
+      }
+
+      const speed = isDeleting ? 40 : 75;
+      setTimeout(typeLoop, speed);
+    }
+    typeLoop();
+
+    setInterval(() => {
+      typedCursor.style.opacity = typedCursor.style.opacity === "0" ? "1" : "0";
+    }, 450);
+
+    // Reveal on scroll
+    const revealElements = document.querySelectorAll(".reveal");
+    const io = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add("active");
+            io.unobserve(entry.target);
+          }
+        });
+      },
+      { threshold: 0.12 }
+    );
+    revealElements.forEach((el) => io.observe(el));
+
+    // Back to top
+    const toTopBtn = document.getElementById("toTop");
+    window.addEventListener("scroll", () => {
+      if (window.scrollY > 420) {
+        toTopBtn.classList.add("show");
+      } else {
+        toTopBtn.classList.remove("show");
+      }
+    });
+    toTopBtn.addEventListener("click", () => {
+      window.scrollTo({ top: 0, behavior: "smooth" });
+    });
+
+    // Footer year
+    document.getElementById("year").textContent = new Date().getFullYear();
+
+    // Custom cursor
+    const dot = document.querySelector(".cursor-dot");
+    const ring = document.querySelector(".cursor-ring");
+    let mx = 0, my = 0, rx = 0, ry = 0;
+
+    window.addEventListener("mousemove", (e) => {
+      mx = e.clientX;
+      my = e.clientY;
+      dot.style.left = mx + "px";
+      dot.style.top = my + "px";
+    });
+
+    function animateRing() {
+      rx += (mx - rx) * 0.18;
+      ry += (my - ry) * 0.18;
+      ring.style.left = rx + "px";
+      ring.style.top = ry + "px";
+      requestAnimationFrame(animateRing);
+    }
+    animateRing();
+
+    document.querySelectorAll("a, button").forEach((el) => {
+      el.addEventListener("mouseenter", () => {
+        ring.style.transform = "translate(-50%, -50%) scale(1.4)";
+      });
+      el.addEventListener("mouseleave", () => {
+        ring.style.transform = "translate(-50%, -50%) scale(1)";
+      });
+    });
+
+    // Particle background
+    const canvas = document.getElementById("particle-canvas");
+    const ctx = canvas.getContext("2d");
+    let particles = [];
+    const particleCount = 65;
+
+    function resizeCanvas() {
+      canvas.width = window.innerWidth;
+      canvas.height = window.innerHeight;
+    }
+    resizeCanvas();
+    window.addEventListener("resize", resizeCanvas);
+
+    function createParticles() {
+      particles = Array.from({ length: particleCount }, () => ({
+        x: Math.random() * canvas.width,
+        y: Math.random() * canvas.height,
+        vx: (Math.random() - 0.5) * 0.4,
+        vy: (Math.random() - 0.5) * 0.4,
+        r: Math.random() * 2 + 0.8
+      }));
+    }
+    createParticles();
+
+    function drawParticles() {
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+      for (let i = 0; i < particles.length; i++) {
+        const p = particles[i];
+        p.x += p.vx;
+        p.y += p.vy;
+
+        if (p.x < 0 || p.x > canvas.width) p.vx *= -1;
+        if (p.y < 0 || p.y > canvas.height) p.vy *= -1;
+
+        ctx.beginPath();
+        ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
+        ctx.fillStyle = "rgba(148, 163, 255, 0.65)";
+        ctx.fill();
+
+        for (let j = i + 1; j < particles.length; j++) {
+          const q = particles[j];
+          const dx = p.x - q.x;
+          const dy = p.y - q.y;
+          const dist = Math.sqrt(dx * dx + dy * dy);
+          if (dist < 110) {
+            ctx.beginPath();
+            ctx.moveTo(p.x, p.y);
+            ctx.lineTo(q.x, q.y);
+            ctx.strokeStyle = `rgba(129, 140, 248, ${0.12 - dist / 1200})`;
+            ctx.stroke();
+          }
+        }
+      }
+
+      requestAnimationFrame(drawParticles);
+    }
+    drawParticles();
+  </script>
+</body>
+</html>
